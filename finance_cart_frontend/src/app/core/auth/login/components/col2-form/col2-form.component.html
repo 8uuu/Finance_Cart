@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="container__body">
+    <h1>¡Vamos a iniciar sesion!</h1>
+    <form [formGroup]="form" (ngSubmit)="submitLogin()">
+      <div class="">
+        <mat-form-field appearance="outline" class="container__input">
+          <mat-label>Correo Electrónico</mat-label>
+          <input
+            matInput
+            placeholder=""
+            autocomplete="off"
+            formControlName="email"
+            required
+          />
+          <mat-icon matSuffix class="color-primary">email</mat-icon>
+        </mat-form-field>
+      </div>
+      <div class="">
+        <mat-form-field appearance="outline" class="container__input">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            placeholder=""
+            autocomplete="off"
+            type="password"
+            formControlName="password"
+            required
+          />
+          <mat-icon matSuffix class="color-primary">visibility</mat-icon>
+        </mat-form-field>
+      </div>
+      <div class="container__forget-password">Olvidé mi contraseña</div>
+      <div>
+        <button
+          mat-raised-button
+          color="primary"
+          class="container__button"
+          type="submit"
+        >
+          Ingresar mi cuenta
+        </button>
+      </div>
+    </form>
+
+    <div>
+      <button
+        mat-stroked-button
+        color="primary"
+        class="container__button"
+        (click)="openDialog()"
+      >
+        Crear una cuenta
+      </button>
+    </div>
+  </div>
+</div>

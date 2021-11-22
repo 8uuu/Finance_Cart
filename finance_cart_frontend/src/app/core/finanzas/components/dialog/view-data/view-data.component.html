@@ -1,0 +1,43 @@
+<table matSort >
+    <tr>
+      <th mat-sort-header="name" >Tasa Efectiva Anual</th>
+      <th mat-sort-header="calories" >N° de días transcurridos</th>
+      <th mat-sort-header="fat" >Tasa Efectiva a {{dataModel.diasTranscurridos}} dias</th>
+      <th mat-sort-header="carbs" >Tasa Descontada a {{dataModel.diasTranscurridos}} dias</th>
+      <th mat-sort-header="protein" >Descuento por {{dataModel.diasTranscurridos}} dias</th>
+      <th mat-sort-header="protein" >Retencion</th>
+    </tr>
+    <tr >
+        <td class="table-style">{{dataModel.dataResponse.tasaEfectivaAnual}}%</td>
+        <td class="table-style">{{dataModel.dataResponse.diasTranscurridos}}</td>
+        <td class="table-style">{{dataModel.dataResponse.tasaEfectivaXdias}}%</td>
+        <td class="table-style">{{dataModel.dataResponse.tasaDescontada}}%</td>
+        <td class="table-style">{{dataModel.dataResponse.descuentoTotal}}</td>
+        <td class="table-style">{{dataModel.dataResponse.retencionInput}}</td>
+      </tr>
+    <tr>
+        <th mat-sort-header="name" class="table-style">Costes Iniciales</th>
+        <th mat-sort-header="calories" class="table-style">Valor Neto</th>
+        <th mat-sort-header="fat" class="table-style">Valor Total a Recibir</th>
+        <th mat-sort-header="carbs" class="table-style">Costes Finales</th>
+        <th mat-sort-header="protein" class="table-style">Valor Total a Entregar</th>
+        <th mat-sort-header="protein" class="table-style">TCEA</th>
+      </tr>
+      <tr >
+        <td>{{dataModel.dataResponse.CyGI}}</td>
+        <td>{{dataModel.dataResponse.valorNeto}}</td>
+        <td>{{dataModel.dataResponse.valorTotalRecibirVR}}</td>
+        <td>{{dataModel.dataResponse.CyGF}}</td>
+        <td>{{dataModel.dataResponse.valorTotalEntregarVE}}</td>
+        <td>{{dataModel.dataResponse.tasaCosteEfectivaAnual}}%</td>
+      </tr>
+   
+  </table>
+
+  <button
+  mat-icon-button
+  aria-label="Example icon button with a vertical three dot icon"
+  (click)="openDialogSave()"
+>
+  <mat-icon class="icon-delete" color="primary" >favorite</mat-icon>
+</button>

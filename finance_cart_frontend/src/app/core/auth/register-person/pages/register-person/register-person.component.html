@@ -1,0 +1,93 @@
+
+
+<form [formGroup]="form" #frmPaciente="ngForm" (ngSubmit)="operar()">
+  <div class="container">
+    <div class="container__body">
+      <mat-card class="card">
+        <div>
+          <h2>Crea tu usuario</h2>
+
+          <mat-form-field appearance="legacy">
+            <mat-label>Correo electrónico</mat-label>
+            <input
+              matInput
+              placeholder=""
+              autocomplete="off"
+              type="email"
+              minlength="2"
+              formControlName="email"
+              required
+            />
+          </mat-form-field>
+
+          <mat-form-field appearance="legacy">
+            <mat-label>Password</mat-label>
+            <input
+              matInput
+              type="password"
+              autocomplete="off"
+              placeholder=""
+              formControlName="password"
+              required
+            />
+          </mat-form-field>
+
+          <mat-form-field appearance="legacy">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" autocomplete="off" placeholder="" />
+          </mat-form-field>
+
+          <div class="personal-information">
+            <h2>Necesitamos tu información</h2>
+            <mat-form-field appearance="legacy">
+              <mat-label>Nombre</mat-label>
+              <input
+                matInput
+                placeholder=""
+                autocomplete="off"
+                type="email"
+                formControlName="name"
+              />
+            </mat-form-field>
+
+            <mat-form-field appearance="legacy">
+              <mat-label>Apellido</mat-label>
+              <input
+                matInput
+                placeholder=""
+                autocomplete="off"
+                type="email"
+                minlength="2"
+                formControlName="lastname"
+                required
+              />
+            </mat-form-field>
+
+            <mat-form-field appearance="legacy">
+              <mat-label>DNI</mat-label>
+              <input
+                matInput
+                type="number"
+                autocomplete="off"
+                placeholder=""
+                formControlName="dni"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+        
+        <div class="container__button">
+          <button
+            mat-raised-button
+            color="primary"
+            class="container__button"
+            type="submit"
+            [disabled]="frmPaciente.invalid"
+          >
+            Registrar cuenta
+          </button>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</form>

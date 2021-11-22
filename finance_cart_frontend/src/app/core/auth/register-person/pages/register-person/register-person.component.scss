@@ -1,0 +1,35 @@
+// @import "../../../../../utils/settings";
+@import '/src/assets/settings';
+
+.card {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.account {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+mat-form-field{
+    width: 70%;
+}
+.personal-information {
+    // background: red;
+    width: 100%;
+}
+h2{
+    color: $color-primary;
+}
+.container__button{
+
+}
+.container__radio-buttons{
+    text-align: center;
+    margin-bottom: 0px;
+}
+.container__radio-buttons__primero{
+    margin-right: 30px;
+}

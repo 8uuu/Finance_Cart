@@ -1,0 +1,87 @@
+.contenido {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // flex-direction: column;
+  .table-one {
+  // background: green;
+
+    display: flex;
+    .table-one__left {
+      .table-one__left__inputs {
+        // background: red;
+        margin-right:80px;
+        // display: grid;
+        // grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    .table-one__right {
+      .table-one__right__inputs {
+        // margin-top: 3px;
+        // background: cyan;
+        // display: grid;
+        // grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  }
+ 
+}
+
+table {
+  width: 100%;
+}
+.icon-edit{
+  color: #FDC942;
+}
+.icon-delete{
+  color: red;
+}
+.icon-wstp{
+  color: #32D551;
+}
+.body__table{
+  width: 90%;
+  margin: auto;
+  // margin-top: 30px;
+}
+.flex{
+  display: flex;
+}
+.container__main{
+  // width: 80%;
+  // margin: auto;
+  // background: #000;
+  margin-top: 50px;
+}
+.container__input{
+  width: 100%;
+}
+.table-two__left{
+  margin-top: 80px;
+}
+.container__button_left{
+  text-align: right;
+  margin-bottom: 20px;
+  margin-right: 20px;
+}
+.container__button_right{
+  text-align: right;
+  margin-bottom: 20px;
+  margin-right: 20px;
+}
+.width-30{
+  width: 30%;
+}
+.center{
+  text-align: center;
+}
+.btn-div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container__button{
+  width: 300px;
+  margin-top: 50px;
+  text-align: center;
+}

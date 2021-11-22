@@ -1,0 +1,447 @@
+<div>
+  <app-navbar></app-navbar>
+  <div class="container__main">
+    <form [formGroup]="form" #frmFactura="ngForm" (ngSubmit)="submit()">
+      <div class="contenido">
+        <div class="table-one">
+          <div class="table-one__left">
+            <div class="table-one__left__inputs">
+              <!--  -->
+              <h1 class="center">Datos</h1>
+              <mat-form-field appearance="outline" class="container__input" >
+                <mat-label>{{ title1 }} (dd/mm/aa)</mat-label>
+                <input
+                matInput
+                [matDatepicker]="fechaDeEmision"
+                formControlName="fechaDeEmision"
+                required
+                />
+                <mat-datepicker-toggle
+                matSuffix
+                [for]="fechaDeEmision"
+                
+                ></mat-datepicker-toggle>
+                <mat-datepicker  #fechaDeEmision ></mat-datepicker>
+              </mat-form-field>
+              <!--  -->
+              <div class="">
+                <mat-form-field appearance="outline" class="container__input">
+                  <mat-label>{{ title2 }} (dd/mm/aa)</mat-label>
+                  <input
+                    matInput
+                    [matDatepicker]="fechaDePago"
+                    formControlName="fechaDePago"
+                    required
+                  />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="fechaDePago"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #fechaDePago></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <!--  -->
+              <div class="">
+                <mat-form-field appearance="outline" class="container__input">
+                  <mat-label>{{ title3 }} (u.m.)</mat-label>
+                  <input
+                    matInput
+                    placeholder=""
+                    autocomplete="off"
+                    formControlName="totalFacturado"
+                    required
+                  />
+                </mat-form-field>
+              </div>
+              <div class="">
+                <mat-form-field appearance="outline" class="container__input">
+                  <mat-label>Retención (u.m.)</mat-label>
+                  <input
+                    matInput
+                    placeholder=""
+                    autocomplete="off"
+                    formControlName="retencion"
+                    required
+                  />
+                </mat-form-field>
+              </div>
+
+              <!-- aki new -->
+              <div
+                [ngClass]="{ 'table-two__left': selectedTasa === 'Nominal' }"
+              >
+                <h1 class="center">Costes / Gatos Iniciales</h1>
+                <!-- Select Portes -->
+                <div class="">
+                  <mat-form-field appearance="fill" class="container__input">
+                    <mat-label>Motivo</mat-label>
+                    <mat-select
+                      [(value)]="selectedMotivoCyGIniciales"
+                      (selectionChange)="selectCyGI($event)"
+                    >
+                      <mat-option
+                        *ngFor="let item of listMotivosCyCI"
+                        [value]="item.name"
+                      >
+                        {{ item.name }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <!-- Select Portes -->
+                <!-- Select Valor Expresado -->
+                <div class="table-two__left__valor">
+                  <div class="flex">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Valor Expresado</mat-label>
+                      <mat-select
+                        [(value)]="selectedEfectivoOPorcentaje"
+                        (selectionChange)="selectCyGI($event)"
+                      >
+                        <mat-option
+                          *ngFor="let item of listValorExpresado"
+                          [value]="item.id"
+                        >
+                          {{ item.name }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <!-- //* input  -->
+                    <mat-form-field
+                      appearance="outline"
+                      class="container__input"
+                    >
+                      <mat-label>Valor</mat-label>
+                      <input
+                        matInput
+                        placeholder=""
+                        autocomplete="off"
+                        formControlName="valorTemp1"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+                <!-- Select Valor Expresado -->
+                <div class="container__button_left">
+                  <a
+                    mat-raised-button
+                    color="primary"
+                    class="width-30"
+                    (click)="agregarCostosIniciales()"
+                  >
+                    Agregar
+                  </a>
+                </div>
+
+                <!-- mostrar table -->
+                <div class="body__table">
+                  <div class="mat-elevation-z8">
+                    <div
+                      class="vacio"
+                      *ngIf="
+                        listCostesyGastosIniciales.length === 0;
+                        else tableLeft
+                      "
+                    >
+                      <div class="alert alert-info">
+                        <h3>No hay Costos/Gastos Iniciales...</h3>
+                      </div>
+                    </div>
+                    <ng-template #tableLeft>
+                      <table mat-table [dataSource]="dataSourceLeft">
+                        <ng-container matColumnDef="name">
+                          <th mat-header-cell *matHeaderCellDef>Nombre</th>
+                          <td mat-cell *matCellDef="let element">
+                            {{ element.name }}
+                          </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="valor">
+                          <th mat-header-cell *matHeaderCellDef>Valor</th>
+                          <td mat-cell *matCellDef="let element">
+                            {{ element.valor }}
+                          </td>
+                        </ng-container>
+
+                        <tr
+                          mat-header-row
+                          *matHeaderRowDef="displayedColumnsLeft"
+                        ></tr>
+                        <tr
+                          mat-row
+                          *matRowDef="let row; columns: displayedColumnsLeft"
+                        ></tr>
+                      </table>
+
+                      <mat-paginator
+                        [pageSizeOptions]="[5, 10, 20]"
+                        showFirstLastButtons
+                        aria-label="Select page of periodic elements"
+                      >
+                      </mat-paginator>
+                    </ng-template>
+                  </div>
+                </div>
+                <!-- mostrar table -->
+              </div>
+            </div>
+            
+          </div>
+          <div class="table-one__right">
+            <div class="table-one__right__inputs">
+              <h1 class="center">Tasa y Plazo</h1>
+              <div class="">
+                <mat-form-field appearance="outline" class="container__input">
+                  <mat-label>Dias por año</mat-label>
+                  <mat-select
+                    [(value)]="selectedDiasxAnio"
+                    (selectionChange)="selectOpt($event)"
+                  >
+                    <mat-option
+                      *ngFor="let item of listDiasxAnio"
+                      [value]="item.id"
+                    >
+                      {{ item.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="flex">
+                <mat-form-field appearance="outline" class="container__input">
+                  <mat-label>Plazo de Tasa</mat-label>
+                  <mat-select
+                    [(value)]="selectedPlazoDeTasa"
+                    (selectionChange)="selectPlazoTasa($event)"
+                  >
+                    <mat-option
+                      *ngFor="let item of listPlazoDeTasa"
+                      [value]="item.id"
+                    >
+                      {{ item.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <!-- !* -->
+                <mat-form-field appearance="outline" class="container__input">
+                  <mat-label>Valor</mat-label>
+                  <input
+                    matInput
+                    placeholder=""
+                    autocomplete="off"
+                    formControlName="plazoDeTasa"
+                  />
+                </mat-form-field>
+              </div>
+              <div
+                class=""
+                *ngIf="selectedTasa === 'Efectiva'; else tasaNominalTemplate"
+              >
+                <mat-form-field appearance="outline" class="container__input">
+                  <mat-label>Tasa Efectiva (%)</mat-label>
+                  <input
+                    matInput
+                    placeholder=""
+                    autocomplete="off"
+                    formControlName="tasaEfectiva"
+                  />
+                </mat-form-field>
+              </div>
+              <ng-template #tasaNominalTemplate>
+                <div class="">
+                  <mat-form-field appearance="outline" class="container__input">
+                    <mat-label>Tasa Nominal (%)</mat-label>
+                    <input
+                      matInput
+                      placeholder=""
+                      autocomplete="off"
+                      formControlName="tasaNominal"
+                    />
+                  </mat-form-field>
+                </div>
+
+                <div class="flex">
+                  <mat-form-field appearance="outline" class="container__input">
+                    <mat-label>Período Capital</mat-label>
+                    <mat-select
+                      [(value)]="selectedPeriodoCapital"
+                      (selectionChange)="selectPeriodoCapital($event)"
+                    >
+                      <mat-option
+                        *ngFor="let item of listPeriodoCapital"
+                        [value]="item.id"
+                      >
+                        {{ item.name }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <!-- !* -->
+                  <mat-form-field appearance="outline" class="container__input">
+                    <mat-label>Valor</mat-label>
+                    <input
+                      matInput
+                      placeholder=""
+                      autocomplete="off"
+                      formControlName="periodoCapital"
+                    />
+                  </mat-form-field>
+                </div>
+              </ng-template>
+
+              <div class="">
+                <mat-form-field appearance="outline" class="container__input">
+                  <mat-label>Fecha de Descuento (dd/mm/aa)</mat-label>
+                  <input
+                    matInput
+                    [matDatepicker]="fechaDescuento"
+                    formControlName="fechaDescuento"
+                    required
+                  />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="fechaDescuento"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #fechaDescuento></mat-datepicker>
+                </mat-form-field>
+              </div>
+
+              <!-- abajo derecha -->
+
+              <!-- //* right -->
+              <div class="table-two__right">
+                <h1 class="center">Costes / Gatos Finales</h1>
+                <!-- Select Portes -->
+                <div class="">
+                  <mat-form-field appearance="fill" class="container__input">
+                    <mat-label>Motivo</mat-label>
+                    <mat-select
+                      [(value)]="selectedMotivoCyGIniciales"
+                      (selectionChange)="selectCyGI($event)"
+                    >
+                      <mat-option
+                        *ngFor="let item of listMotivosCyCI"
+                        [value]="item.name"
+                      >
+                        {{ item.name }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <!-- Select Portes -->
+                <!-- Select Valor Expresado -->
+                <div class="table-two__left__valor">
+                  <div class="flex">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Valor Expresado</mat-label>
+                      <mat-select
+                        [(value)]="selectedEfectivoOPorcentaje"
+                        (selectionChange)="selectCyGI($event)"
+                      >
+                        <mat-option
+                          *ngFor="let item of listValorExpresado"
+                          [value]="item.id"
+                        >
+                          {{ item.name }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <!-- //* input  -->
+                    <mat-form-field
+                      appearance="outline"
+                      class="container__input"
+                    >
+                      <mat-label>Valor</mat-label>
+                      <input
+                        matInput
+                        placeholder=""
+                        autocomplete="off"
+                        formControlName="valorTemp2"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+                <!-- Select Valor Expresado -->
+                <div class="container__button_right">
+                  <a
+                    mat-raised-button
+                    color="primary"
+                    class="width-30"
+                    (click)="agregarCostosFinales()"
+                  >
+                    Agregar
+                  </a>
+                </div>
+
+                <!-- mostrar table -->
+                <div class="body__table">
+                  <div class="mat-elevation-z8">
+                    <div
+                      class="vacio"
+                      *ngIf="
+                        listCostesyGastosFinales.length === 0;
+                        else tableRight
+                      "
+                    >
+                      <div class="alert alert-info">
+                        <h3>No hay Costos/Gastos Finales...</h3>
+                      </div>
+                    </div>
+                    <ng-template #tableRight>
+                      <table mat-table [dataSource]="dataSourceRight">
+                        <ng-container matColumnDef="name">
+                          <th mat-header-cell *matHeaderCellDef>Nombre</th>
+                          <td mat-cell *matCellDef="let element">
+                            {{ element.name }}
+                          </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="valor">
+                          <th mat-header-cell *matHeaderCellDef>Valor</th>
+                          <td mat-cell *matCellDef="let element">
+                            {{ element.valor }}
+                          </td>
+                        </ng-container>
+
+                        <tr
+                          mat-header-row
+                          *matHeaderRowDef="displayedColumnsRight"
+                        ></tr>
+                        <tr
+                          mat-row
+                          *matRowDef="let row; columns: displayedColumnsRight"
+                        ></tr>
+                      </table>
+
+                      <mat-paginator
+                        [pageSizeOptions]="[5, 10, 20]"
+                        showFirstLastButtons
+                        aria-label="Select page of periodic elements"
+                      >
+                      </mat-paginator>
+                    </ng-template>
+                  </div>
+                </div>
+
+                <!-- mostrar table -->
+              </div>
+            </div>
+            <div class="table_footer"></div>
+          </div>
+        </div>
+        <!-- termina green -->
+        <div></div>
+      </div>
+      <div class="btn-div">
+        <button
+          mat-raised-button
+          color="primary"
+          class="container__button"
+          [disabled]="frmFactura.invalid"
+          type="submit"
+        >
+          Calcular
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
