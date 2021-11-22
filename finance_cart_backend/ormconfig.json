@@ -1,0 +1,10 @@
+{
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "username": "postgres",
+    "password": "admin",
+    "database": "finanzas",
+    "entities":["dist/src/models/**/*.js"],
+    "sysnchronize":true
+ }
