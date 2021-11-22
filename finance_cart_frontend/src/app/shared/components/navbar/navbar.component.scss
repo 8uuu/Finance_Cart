@@ -1,0 +1,30 @@
+.example-spacer {
+  // flex: 1 1 auto;
+}
+.logo {
+  cursor: pointer;
+}
+.items-link {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+.center-y{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all .5s ease;
+  margin-left: 50px;
+  font-size: .8em;
+  font-family: 'Quicksand', sans-serif;
+  
+  &:hover{
+    opacity: .5;
+  }
+
+  .mat-icon{
+    margin-left: 8px;
+    
+  }
+}

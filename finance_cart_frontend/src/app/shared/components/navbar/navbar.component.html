@@ -1,0 +1,23 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <mat-form-field appearance="outline" class="container__input">
+      <mat-label>Plazo de Tasa</mat-label>
+      <mat-select
+        [(value)]="selectedTasa"
+        (selectionChange)="selectTasa($event)"
+      >
+        <mat-option *ngFor="let item of listTasa" [value]="item.name">
+          {{ item.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="items-link">
+      <div *ngFor="let item of menu">
+        <a class="center-y" mat-button [routerLink]="item.ruta" (click)="action(item.action)" >
+          <span>{{ item.text }}</span>
+          <mat-icon>{{ item.icon }}</mat-icon>
+        </a>
+      </div>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
